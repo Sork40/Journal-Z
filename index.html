@@ -37,6 +37,7 @@
 
     .page.visible {
       display: block;
+      opacity: 1;
     }
 
     .controls {
@@ -79,20 +80,23 @@
   </style>
 </head>
 <body>
+
   <div class="book">
+    <!-- Flèches Shenron -->
     <div class="controls">
-      <button class="btn" id="prev"><img src="icons/arrow-left.png" alt="Précédent"/></button>
-      <button class="btn" id="next"><img src="icons/arrow-right.png" alt="Suivant"/></button>
+      <button class="btn" id="prev"><img src="images/icone_01.png" alt="Page précédente" /></button>
+      <button class="btn" id="next"><img src="images/icone_02.png" alt="Page suivante" /></button>
     </div>
 
-    <img src="images/page_01.png" alt="Page 1" class="page visible"/>
-    <img src="images/page_02.png" alt="Page 2" class="page"/>
-    <img src="images/page_03.png" alt="Page 3" class="page"/>
-    <img src="images/page_04.png" alt="Page 4" class="page"/>
-    <img src="images/page_05.png" alt="Page 5" class="page"/>
-    <img src="images/page_06.png" alt="Page 6" class="page"/>
-    <img src="images/page_07.png" alt="Page 7" class="page"/>
-    <img src="images/page_08.png" alt="Page 8" class="page"/>
+    <!-- Pages du carnet -->
+    <img src="images/page_01.png" alt="Page 1" class="page visible" />
+    <img src="images/page_02.png" alt="Page 2" class="page" />
+    <img src="images/page_03.png" alt="Page 3" class="page" />
+    <img src="images/page_04.png" alt="Page 4" class="page" />
+    <img src="images/page_05.png" alt="Page 5" class="page" />
+    <img src="images/page_06.png" alt="Page 6" class="page" />
+    <img src="images/page_07.png" alt="Page 7" class="page" />
+    <img src="images/page_08.png" alt="Page 8" class="page" />
   </div>
 
   <script>
@@ -130,7 +134,7 @@
       }
     });
 
-    // Preload images
+    // Préchargement des images
     pages.forEach(p => {
       const img = new Image();
       img.src = p.src;

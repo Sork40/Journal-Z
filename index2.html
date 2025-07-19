@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carnet Z – Livre interactif</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      margin: 0;
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    #flipbook {
+      width: 90vw;
+      height: 90vh;
+    }
+
+    #flipbook .page {
+      width: 100%;
+      height: 100%;
+      background-color: white;
+      background-size: cover;
+      background-position: center;
+    }
+  </style>
+  <!-- jQuery and Turn.js -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/turn.js/3/turn.min.js"></script>
+</head>
+<body>
+
+  <div id="flipbook">
+    <div class="page" style="background-image: url('images/page_01.png');"></div>
+    <div class="page" style="background-image: url('images/page_02.png');"></div>
+    <div class="page" style="background-image: url('images/page_03.png');"></div>
+    <div class="page" style="background-image: url('images/page_04.png');"></div>
+    <div class="page" style="background-image: url('images/page_05.png');"></div>
+    <div class="page" style="background-image: url('images/page_06.png');"></div>
+    <div class="page" style="background-image: url('images/page_07.png');"></div>
+    <div class="page" style="background-image: url('images/page_08.png');"></div>
+  </div>
+
+  <script>
+    $(document).ready(function() {
+      $('#flipbook').turn({
+        width: $('#flipbook').width(),
+        height: $('#flipbook').height(),
+        autoCenter: true,
+        acceleration: true,
+        elevation: 50,
+        gradients: true,
+        duration: 1200
+      });
+    });
+  </script>
+
+</body>
+</html>

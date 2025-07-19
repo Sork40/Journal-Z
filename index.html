@@ -2,40 +2,124 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Journal Z – Semaine 1</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      margin: 0;
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .book {
+      position: relative;
+      width: 100%;
+      max-width: 1000px;
+      height: auto;
+    }
+
+    .page {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: auto;
+      display: none;
+      transition: opacity 0.4s ease-in-out;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+    }
+
+    .page.visible {
+      display: block;
+      opacity: 1;
+    }
+
+    .controls {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+      z-index: 10;
+    }
+
+    .btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid #fff;
+      color: #fff;
+      font-size: 1.5rem;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+  </style>
 </head>
 <body>
   <div class="book">
-    <img src="images/page_01.png" alt="Page 1" class="page" />
-    <img src="images/page_02.png" alt="Page 2" class="page" />
-    <img src="images/page_03.png" alt="Page 3" class="page" />
-    <img src="images/page_04.png" alt="Page 4" class="page" />
-    <img src="images/page_05.png" alt="Page 5" class="page" />
-    <img src="images/page_06.png" alt="Page 6" class="page" />
-    <img src="images/page_07.png" alt="Page 7" class="page" />
-    <img src="images/page_08.png" alt="Page 8" class="page" />
+    <div class="controls">
+      <button class="btn" id="prev">←</button>
+      <button class="btn" id="next">→</button>
+    </div>
+
+    <img src="images/page_01.png" alt="Page 1" class="page visible"/>
+    <img src="images/page_02.png" alt="Page 2" class="page"/>
+    <img src="images/page_03.png" alt="Page 3" class="page"/>
+    <img src="images/page_04.png" alt="Page 4" class="page"/>
+    <img src="images/page_05.png" alt="Page 5" class="page"/>
+    <img src="images/page_06.png" alt="Page 6" class="page"/>
+    <img src="images/page_07.png" alt="Page 7" class="page"/>
+    <img src="images/page_08.png" alt="Page 8" class="page"/>
   </div>
 
   <script>
     const pages = document.querySelectorAll('.page');
     let current = 0;
 
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowRight' && current < pages.length - 1) {
-        pages[current].style.display = 'none';
+    const showPage = (index) => {
+      pages.forEach((p, i) => {
+        p.classList.remove('visible');
+        if (i === index) {
+          p.classList.add('visible');
+        }
+      });
+    };
+
+    document.getElementById('next').addEventListener('click', () => {
+      if (current < pages.length - 1) {
         current++;
-        pages[current].style.display = 'block';
-      } else if (e.key === 'ArrowLeft' && current > 0) {
-        pages[current].style.display = 'none';
-        current--;
-        pages[current].style.display = 'block';
+        showPage(current);
       }
     });
 
-    pages.forEach((page, i) => {
-      page.style.display = i === 0 ? 'block' : 'none';
+    document.getElementById('prev').addEventListener('click', () => {
+      if (current > 0) {
+        current--;
+        showPage(current);
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') {
+        document.getElementById('next').click();
+      } else if (e.key === 'ArrowLeft') {
+        document.getElementById('prev').click();
+      }
+    });
+
+    // Preload images
+    pages.forEach(p => {
+      const img = new Image();
+      img.src = p.src;
     });
   </script>
 </body>

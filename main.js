@@ -1,11 +1,9 @@
-
 $(document).ready(function () {
   $('#book').turn({
-    width: window.innerWidth,
-    height: window.innerHeight,
+    width: '100%',
+    height: '100%',
     autoCenter: true,
-    gradients: true,
-    acceleration: true
+    gradients: true
   });
 
   $('#next').click(function () {

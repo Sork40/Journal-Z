@@ -111,10 +111,17 @@
     const showPage = (index) => {
       pages.forEach((p, i) => {
         p.classList.remove('visible');
-        if (i === index) {
-          p.classList.add('visible');
-        }
+        p.style.zIndex = '1';
+        p.style.pointerEvents = 'none';
       });
+
+      const nextPage = pages[index];
+      nextPage.style.zIndex = '2';
+      nextPage.style.pointerEvents = 'auto';
+
+      // Force reflow pour déclencher l'animation
+      void nextPage.offsetWidth;
+      nextPage.classList.add('visible');
     };
 
     document.getElementById('next').addEventListener('click', () => {

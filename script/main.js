@@ -1,16 +1,10 @@
-
-$(document).ready(function () {
-  $('#book').turn({
+document.addEventListener("DOMContentLoaded", function() {
+  $('#flipbook').turn({
     width: 800,
-    height: 600,
+    height: 500,
     autoCenter: true,
-  });
-
-  $('#next').click(function () {
-    $('#book').turn('next');
-  });
-
-  $('#prev').click(function () {
-    $('#book').turn('previous');
+    gradients: true,
+    elevation: 50,
+    duration: 1500
   });
 });

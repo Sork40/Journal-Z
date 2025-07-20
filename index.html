@@ -84,76 +84,20 @@
     }
   </style>
 </head>
+
 <body>
-
-  <div class="book">
-    <!-- Flèches Shenron -->
-    <div class="controls">
-      <button class="btn" id="prev"><img src="images/icone_01.png" alt="Page précédente" /></button>
-      <button class="btn" id="next"><img src="images/icone_02.png" alt="Page suivante" /></button>
-    </div>
-
-    <!-- Pages du carnet -->
-    <img src="images/page_01.png" alt="Page 1" class="page visible" />
-    <img src="images/page_02.png" alt="Page 2" class="page" />
-    <img src="images/page_03.png" alt="Page 3" class="page" />
-    <img src="images/page_04.png" alt="Page 4" class="page" />
-    <img src="images/page_05.png" alt="Page 5" class="page" />
-    <img src="images/page_06.png" alt="Page 6" class="page" />
-    <img src="images/page_07.png" alt="Page 7" class="page" />
-    <img src="images/page_08.png" alt="Page 8" class="page" />
-  </div>
-
-  <script>
-    const pages = document.querySelectorAll('.page');
-    let current = 0;
-
-    const showPage = (index) => {
-      pages.forEach((p, i) => {
-        p.classList.remove('visible');
-        p.style.zIndex = '1';
-        p.style.pointerEvents = 'none';
-      });
-
-      const nextPage = pages[index];
-      nextPage.style.zIndex = '2';
-      nextPage.style.pointerEvents = 'auto';
-
-      // Force reflow pour déclencher l'animation
-      void nextPage.offsetWidth;
-      nextPage.classList.add('visible');
-    };
-
-    document.getElementById('next').addEventListener('click', () => {
-      if (current < pages.length - 1) {
-        current++;
-        showPage(current);
-      }
-    });
-
-    document.getElementById('prev').addEventListener('click', () => {
-      if (current > 0) {
-        current--;
-        showPage(current);
-      }
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowRight') {
-        document.getElementById('next').click();
-      } else if (e.key === 'ArrowLeft') {
-        document.getElementById('prev').click();
-      }
-    });
-
-    // Préchargement des images
-    pages.forEach(p => {
-      const img = new Image();
-      img.src = p.src;
-    });
-  </script>
-<script src="script/jquery.min.js"></script>
-<script src="script/turn.min.js"></script>
-<script src="script/main.js"></script>
+<div id='flipbook'>
+  <img src='images/page_01.png' class='page'>
+  <img src='images/page_02.png' class='page'>
+  <img src='images/page_03.png' class='page'>
+  <img src='images/page_04.png' class='page'>
+  <img src='images/page_05.png' class='page'>
+  <img src='images/page_06.png' class='page'>
+  <img src='images/page_07.png' class='page'>
+  <img src='images/page_08.png' class='page'>
+</div>
+<script src='script/jquery.min.js'></script>
+<script src='script/turn.min.js'></script>
+<script src='script/main.js'></script>
 </body>
 </html>

@@ -1,4 +1,15 @@
-// Main JS file to initiate turn.js
-$(function() {
-  $('.book').turn({gradients: true, acceleration: true});
+$(document).ready(function() {
+  $('#book').turn({
+    width: window.innerWidth,
+    height: window.innerHeight,
+    autoCenter: true
+  });
+
+  $('#next').click(function() {
+    $('#book').turn('next');
+  });
+
+  $('#prev').click(function() {
+    $('#book').turn('previous');
+  });
 });

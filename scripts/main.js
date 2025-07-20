@@ -1,36 +1,19 @@
-const pages = document.querySelectorAll('.page');
 let current = 0;
+const pages = document.querySelectorAll('.page');
 
-const updateVisibility = (index) => {
-  pages.forEach((p, i) => {
-    p.classList.remove('visible');
-    if (i === index) {
-      p.classList.add('visible');
-    }
+function updatePages() {
+  pages.forEach((page, i) => {
+    page.style.zIndex = pages.length - i;
+    page.style.transform = i <= current ? 'rotateY(-180deg)' : 'rotateY(0deg)';
   });
-};
+}
 
-document.getElementById('next').addEventListener('click', () => {
-  if (current < pages.length - 1) {
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' && current < pages.length - 1) {
     current++;
-    updateVisibility(current);
-  }
-});
-
-document.getElementById('prev').addEventListener('click', () => {
-  if (current > 0) {
+    updatePages();
+  } else if (e.key === 'ArrowLeft' && current > 0) {
     current--;
-    updateVisibility(current);
+    updatePages();
   }
 });
-
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'ArrowRight') {
-    document.getElementById('next').click();
-  } else if (e.key === 'ArrowLeft') {
-    document.getElementById('prev').click();
-  }
-});
-
-// Initialisation
-updateVisibility(current);

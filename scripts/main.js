@@ -1,27 +1,35 @@
-$(document).ready(function(){
-  $('#flipbook').turn({
-    width: window.innerWidth,
-    height: window.innerHeight,
-    autoCenter: true,
-    elevation: 50,
-    gradients: true,
-    display: 'double',
-    duration: 800
-  });
 
-  $('#next').click(function() {
-    $('#flipbook').turn('next');
-  });
+let current = 0;
+const pages = document.querySelectorAll('.page');
 
-  $('#prev').click(function() {
-    $('#flipbook').turn('previous');
+function updatePages() {
+  pages.forEach((page, index) => {
+    page.style.zIndex = pages.length - index;
+    page.style.transform = index < current ? 'rotateY(-180deg)' : 'rotateY(0deg)';
+    page.style.opacity = index === current ? '1' : '0';
   });
+}
 
-  $(document).keydown(function(e) {
-    if (e.key === 'ArrowRight') {
-      $('#flipbook').turn('next');
-    } else if (e.key === 'ArrowLeft') {
-      $('#flipbook').turn('previous');
-    }
-  });
+document.getElementById('next').addEventListener('click', () => {
+  if (current < pages.length - 1) {
+    current++;
+    updatePages();
+  }
 });
+
+document.getElementById('prev').addEventListener('click', () => {
+  if (current > 0) {
+    current--;
+    updatePages();
+  }
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight') {
+    document.getElementById('next').click();
+  } else if (e.key === 'ArrowLeft') {
+    document.getElementById('prev').click();
+  }
+});
+
+window.onload = updatePages;

@@ -2,27 +2,155 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Journal Z</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Journal Z – Semaine 1</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+      background-color: #000;
+      overflow: hidden;
+      font-family: sans-serif;
+    }
+
+    .book {
+      position: relative;
+      height: 100%;
+      width: 100%;
+    }
+
+    .page {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      max-width: 100%;
+      max-height: 100%;
+      transform: translate(-50%, -50%) rotateY(90deg);
+      transform-origin: center left;
+      opacity: 0;
+      display: block;
+      transition: transform 0.6s ease, opacity 0.6s ease;
+      backface-visibility: hidden;
+      z-index: 1;
+    }
+
+    .page.visible {
+      transform: translate(-50%, -50%) rotateY(0deg);
+      opacity: 1;
+      z-index: 2;
+    }
+
+    .controls {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transform: translateY(-50%);
+      padding: 0 20px;
+      z-index: 10;
+    }
+
+    .btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      width: 60px;
+      height: 60px;
+      transition: transform 0.3s;
+    }
+
+    .btn img {
+      width: 100%;
+      height: auto;
+      filter: drop-shadow(0 0 10px yellow);
+    }
+
+    .btn:hover {
+      transform: scale(1.1);
+    }
+
+    @media (max-width: 768px) {
+      .btn {
+        width: 40px;
+        height: 40px;
+      }
+    }
+  </style>
 </head>
 <body>
-  <div class="book" id="book">
-    <img src="images/page_01.png" class="page" alt="Page 1" />
-    <img src="images/page_02.png" class="page" alt="Page 2" />
-    <img src="images/page_03.png" class="page" alt="Page 3" />
-    <img src="images/page_04.png" class="page" alt="Page 4" />
-    <img src="images/page_05.png" class="page" alt="Page 5" />
-    <img src="images/page_06.png" class="page" alt="Page 6" />
-    <img src="images/page_07.png" class="page" alt="Page 7" />
-    <img src="images/page_08.png" class="page" alt="Page 8" />
+
+  <div class="book">
+    <!-- Flèches Shenron -->
+    <div class="controls">
+      <button class="btn" id="prev"><img src="images/icone_01.png" alt="Page précédente" /></button>
+      <button class="btn" id="next"><img src="images/icone_02.png" alt="Page suivante" /></button>
+    </div>
+
+    <!-- Pages du carnet -->
+    <img src="images/page_01.png" alt="Page 1" class="page visible" />
+    <img src="images/page_02.png" alt="Page 2" class="page" />
+    <img src="images/page_03.png" alt="Page 3" class="page" />
+    <img src="images/page_04.png" alt="Page 4" class="page" />
+    <img src="images/page_05.png" alt="Page 5" class="page" />
+    <img src="images/page_06.png" alt="Page 6" class="page" />
+    <img src="images/page_07.png" alt="Page 7" class="page" />
+    <img src="images/page_08.png" alt="Page 8" class="page" />
   </div>
 
-  <img src="images/icone_gauche.png" class="nav left" id="prev" alt="Précédent" />
-  <img src="images/icone_droite.png" class="nav right" id="next" alt="Suivant" />
+  <script>
+    const pages = document.querySelectorAll('.page');
+    let current = 0;
 
-  <script src="scripts/jquery.min.js"></script>
-  <script src="scripts/turn.min.js"></script>
-  <script src="main.js"></script>
+    const showPage = (index) => {
+      pages.forEach((p, i) => {
+        p.classList.remove('visible');
+        p.style.zIndex = '1';
+        p.style.pointerEvents = 'none';
+      });
+
+      const nextPage = pages[index];
+      nextPage.style.zIndex = '2';
+      nextPage.style.pointerEvents = 'auto';
+
+      // Force reflow pour déclencher l'animation
+      void nextPage.offsetWidth;
+      nextPage.classList.add('visible');
+    };
+
+    document.getElementById('next').addEventListener('click', () => {
+      if (current < pages.length - 1) {
+        current++;
+        showPage(current);
+      }
+    });
+
+    document.getElementById('prev').addEventListener('click', () => {
+      if (current > 0) {
+        current--;
+        showPage(current);
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') {
+        document.getElementById('next').click();
+      } else if (e.key === 'ArrowLeft') {
+        document.getElementById('prev').click();
+      }
+    });
+
+    // Préchargement des images
+    pages.forEach(p => {
+      const img = new Image();
+      img.src = p.src;
+    });
+  </script>
 </body>
 </html>

@@ -1,66 +1,18 @@
-* {
+body {
   margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body, html {
-  width: 100%;
-  height: 100%;
-  background-color: #000;
-  overflow: hidden;
+  background: #000;
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.book {
-  position: relative;
-  width: 100vw;
   height: 100vh;
 }
-
-#flipbook {
-  width: 100%;
-  height: 100%;
-  position: relative;
+#book {
+  width: 90vw;
+  height: 90vh;
 }
-
 .page {
-  position: absolute;
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  display: none;
-  transition: transform 1s ease, opacity 1s ease;
-}
-
-.page.visible {
-  display: block;
-  z-index: 2;
-}
-
-.controls {
   position: absolute;
-  top: 50%;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  transform: translateY(-50%);
-  padding: 0 20px;
-  z-index: 10;
-}
-
-.btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  width: 60px;
-  height: 60px;
-}
-
-.btn img {
-  width: 100%;
-  height: auto;
-  filter: drop-shadow(0 0 10px yellow);
+  transition: transform 1s;
 }

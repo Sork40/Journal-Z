@@ -1,14 +1,18 @@
-$(document).ready(function(){
+
+$(document).ready(function () {
   $('#book').turn({
-    width: '100%',
-    height: '100%',
-    autoCenter: true
+    width: window.innerWidth,
+    height: window.innerHeight,
+    autoCenter: true,
+    gradients: true,
+    acceleration: true
   });
 
-  $('#next').click(function(){
+  $('#next').click(function () {
     $('#book').turn('next');
   });
-  $('#prev').click(function(){
+
+  $('#prev').click(function () {
     $('#book').turn('previous');
   });
 });

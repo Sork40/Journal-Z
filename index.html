@@ -4,19 +4,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Journal Z – Semaine 1</title>
+  <title>Journal Z – Livre interactif</title>
   <style>
     html, body {
       margin: 0;
       padding: 0;
-      background: black;
+      background-color: black;
       overflow: hidden;
     }
 
     #flipbook {
       width: 100vw;
       height: 100vh;
-      position: relative;
+    }
+
+    .page {
+      width: 100%;
+      height: 100%;
     }
 
     .page img {
@@ -33,7 +37,7 @@
       height: 60px;
       transform: translateY(-50%);
       cursor: pointer;
-      z-index: 100;
+      z-index: 9999;
     }
 
     #prev {
@@ -47,7 +51,7 @@
     .nav-arrow img {
       width: 100%;
       height: auto;
-      filter: drop-shadow(0 0 8px orange);
+      filter: drop-shadow(0 0 10px yellow);
       transition: transform 0.3s ease;
     }
 
@@ -63,49 +67,49 @@
     }
   </style>
 </head>
-
 <body>
-  <div id="flipbook">
-    <div class="page"><img src="images/page_01.png" alt="Page 1"></div>
-    <div class="page"><img src="images/page_02.png" alt="Page 2"></div>
-    <div class="page"><img src="images/page_03.png" alt="Page 3"></div>
-    <div class="page"><img src="images/page_04.png" alt="Page 4"></div>
-    <div class="page"><img src="images/page_05.png" alt="Page 5"></div>
-    <div class="page"><img src="images/page_06.png" alt="Page 6"></div>
-    <div class="page"><img src="images/page_07.png" alt="Page 7"></div>
-    <div class="page"><img src="images/page_08.png" alt="Page 8"></div>
 
-    <div id="prev" class="nav-arrow"><img src="images/icone_01.png" alt="Précédent"></div>
-    <div id="next" class="nav-arrow"><img src="images/icone_02.png" alt="Suivant"></div>
-  </div>
+<div id="flipbook">
+  <div class="page"><img src="images/page_01.png" alt="Page 1"></div>
+  <div class="page"><img src="images/page_02.png" alt="Page 2"></div>
+  <div class="page"><img src="images/page_03.png" alt="Page 3"></div>
+  <div class="page"><img src="images/page_04.png" alt="Page 4"></div>
+  <div class="page"><img src="images/page_05.png" alt="Page 5"></div>
+  <div class="page"><img src="images/page_06.png" alt="Page 6"></div>
+  <div class="page"><img src="images/page_07.png" alt="Page 7"></div>
+  <div class="page"><img src="images/page_08.png" alt="Page 8"></div>
 
-  <script src="script/jquery.min.js"></script>
-  <script src="script/turn.min.js"></script>
-  <script>
-    $(document).ready(function () {
-      const $flipbook = $('#flipbook');
+  <div id="prev" class="nav-arrow"><img src="images/icone_01.png" alt="Précédent"></div>
+  <div id="next" class="nav-arrow"><img src="images/icone_02.png" alt="Suivant"></div>
+</div>
 
-      $flipbook.turn({
-        width: window.innerWidth,
-        height: window.innerHeight,
-        autoCenter: true,
-        elevation: 50,
-        duration: 1200,
-        gradients: true
-      });
+<script src="script/jquery.min.js"></script>
+<script src="script/turn.min.js"></script>
+<script>
+  $(document).ready(function () {
+    const $flipbook = $('#flipbook');
 
-      $('#prev').click(function () {
-        $flipbook.turn('previous');
-      });
-
-      $('#next').click(function () {
-        $flipbook.turn('next');
-      });
-
-      $(window).on('resize', function () {
-        $flipbook.turn('size', window.innerWidth, window.innerHeight);
-      });
+    $flipbook.turn({
+      width: window.innerWidth,
+      height: window.innerHeight,
+      autoCenter: true,
+      elevation: 50,
+      gradients: true,
+      duration: 1200
     });
-  </script>
+
+    $('#prev').click(function () {
+      $flipbook.turn('previous');
+    });
+
+    $('#next').click(function () {
+      $flipbook.turn('next');
+    });
+
+    $(window).on('resize', function () {
+      $flipbook.turn('size', window.innerWidth, window.innerHeight);
+    });
+  });
+</script>
 </body>
 </html>

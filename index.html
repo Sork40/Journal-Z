@@ -16,6 +16,8 @@
     #flipbook {
       width: 100vw;
       height: 100vh;
+      position: relative;
+      z-index: 1;
     }
 
     .page {
@@ -39,6 +41,7 @@
       transform: translateY(-50%);
       cursor: pointer;
       z-index: 9999;
+      pointer-events: auto;
     }
 
     #prev {
@@ -79,10 +82,10 @@
   <div class="page"><img src="images/page_06.png" alt="Page 6"></div>
   <div class="page"><img src="images/page_07.png" alt="Page 7"></div>
   <div class="page"><img src="images/page_08.png" alt="Page 8"></div>
-
-  <div id="prev" class="nav-arrow"><img src="images/icone_01.png" alt="Précédent"></div>
-  <div id="next" class="nav-arrow"><img src="images/icone_02.png" alt="Suivant"></div>
 </div>
+
+<div id="prev" class="nav-arrow"><img src="images/icone_01.png" alt="Précédent"></div>
+<div id="next" class="nav-arrow"><img src="images/icone_02.png" alt="Suivant"></div>
 
 <script src="script/jquery.min.js"></script>
 <script src="script/turn.min.js"></script>

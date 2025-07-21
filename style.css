@@ -10,14 +10,15 @@ html, body {
   width: 800px;
   height: 600px;
   margin: 0 auto;
-  position: relative;
 }
 
-#flipbook .page {
+.page {
   width: 400px;
   height: 600px;
+  float: left;
   background: white;
   border: 1px solid #ccc;
+  overflow: hidden;
 }
 
 .page img {

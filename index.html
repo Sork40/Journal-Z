@@ -16,8 +16,6 @@
     #flipbook {
       width: 100vw;
       height: 100vh;
-      position: relative;
-      z-index: 1;
     }
 
     .page {
@@ -89,31 +87,29 @@
 
 <script src="script/jquery.min.js"></script>
 <script src="script/turn.min.js"></script>
-<script src="script/main.js"></script>
 <script>
-  $(document).ready(function () {
+  $(function () {
     const $flipbook = $('#flipbook');
 
-    $flipbook.turn({
-      width: window.innerWidth,
-      height: window.innerHeight,
-      autoCenter: true,
-      elevation: 50,
-      gradients: true,
-      duration: 1200
-    });
+    if ($flipbook.turn) {
+      $flipbook.turn({
+        width: window.innerWidth,
+        height: window.innerHeight,
+        autoCenter: true,
+        elevation: 50,
+        duration: 1000,
+        gradients: true
+      });
 
-    $('#prev').click(function () {
-      $flipbook.turn('previous');
-    });
+      $('#prev').click(() => $flipbook.turn('previous'));
+      $('#next').click(() => $flipbook.turn('next'));
 
-    $('#next').click(function () {
-      $flipbook.turn('next');
-    });
-
-    $(window).on('resize', function () {
-      $flipbook.turn('size', window.innerWidth, window.innerHeight);
-    });
+      $(window).on('resize', () => {
+        $flipbook.turn('size', window.innerWidth, window.innerHeight);
+      });
+    } else {
+      console.error("turn.js n'est pas correctement chargé");
+    }
   });
 </script>
 </body>

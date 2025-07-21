@@ -16,6 +16,7 @@
     #flipbook {
       width: 100vw;
       height: 100vh;
+      position: relative;
     }
 
     .page img {
@@ -23,6 +24,42 @@
       height: 100%;
       object-fit: cover;
       display: block;
+    }
+
+    .nav-arrow {
+      position: absolute;
+      top: 50%;
+      width: 60px;
+      height: 60px;
+      transform: translateY(-50%);
+      cursor: pointer;
+      z-index: 100;
+    }
+
+    #prev {
+      left: 10px;
+    }
+
+    #next {
+      right: 10px;
+    }
+
+    .nav-arrow img {
+      width: 100%;
+      height: auto;
+      filter: drop-shadow(0 0 8px orange);
+      transition: transform 0.3s ease;
+    }
+
+    .nav-arrow:hover img {
+      transform: scale(1.1);
+    }
+
+    @media (max-width: 768px) {
+      .nav-arrow {
+        width: 40px;
+        height: 40px;
+      }
     }
   </style>
 </head>
@@ -37,13 +74,18 @@
     <div class="page"><img src="images/page_06.png" alt="Page 6"></div>
     <div class="page"><img src="images/page_07.png" alt="Page 7"></div>
     <div class="page"><img src="images/page_08.png" alt="Page 8"></div>
+
+    <div id="prev" class="nav-arrow"><img src="images/icone_01.png" alt="Précédent"></div>
+    <div id="next" class="nav-arrow"><img src="images/icone_02.png" alt="Suivant"></div>
   </div>
 
   <script src="script/jquery.min.js"></script>
   <script src="script/turn.min.js"></script>
   <script>
     $(document).ready(function () {
-      $('#flipbook').turn({
+      const $flipbook = $('#flipbook');
+
+      $flipbook.turn({
         width: window.innerWidth,
         height: window.innerHeight,
         autoCenter: true,
@@ -52,8 +94,16 @@
         gradients: true
       });
 
+      $('#prev').click(function () {
+        $flipbook.turn('previous');
+      });
+
+      $('#next').click(function () {
+        $flipbook.turn('next');
+      });
+
       $(window).on('resize', function () {
-        $('#flipbook').turn('size', window.innerWidth, window.innerHeight);
+        $flipbook.turn('size', window.innerWidth, window.innerHeight);
       });
     });
   </script>

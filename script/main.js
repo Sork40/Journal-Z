@@ -1,4 +1,3 @@
-
 $(document).ready(function () {
   $('#flipbook').turn({
     width: window.innerWidth,
@@ -6,7 +5,12 @@ $(document).ready(function () {
     autoCenter: true,
     elevation: 50,
     duration: 1000,
-    gradients: true
+    gradients: true,
+    when: {
+      turning: function(event, page, view) {
+        console.log("Page tournante vers :", page);
+      }
+    }
   });
 
   $('#prev').click(function () {

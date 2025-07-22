@@ -10,14 +10,15 @@ html, body {
   width: 800px;
   height: 600px;
   margin: 0 auto;
+  position: relative;
 }
 
 .page {
   width: 400px;
   height: 600px;
-  background: white;
   float: left;
-  display: block;
+  background: white;
+  border: 1px solid #ccc;
   overflow: hidden;
   box-sizing: border-box;
 }

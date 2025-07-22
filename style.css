@@ -1,68 +1,83 @@
-
-html, body {
+* {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  background-color: black;
+}
+
+body {
+  margin: 0;
+  background-color: #f8f2e3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: sans-serif;
   overflow: hidden;
 }
 
-#flipbook {
-  width: 800px;
-  height: 600px;
-  margin: 0 auto;
+.book {
+  width: 90vw;
+  height: 90vh;
   position: relative;
 }
 
 .page {
-  width: 400px;
-  height: 600px;
-  float: left;
-  background: white;
-  border: 1px solid #ccc;
-  overflow: hidden;
-  box-sizing: border-box;
-}
-
-.page img {
+  position: absolute;
   width: 100%;
   height: 100%;
   object-fit: contain;
-  display: block;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  display: none;
+  transition: opacity 0.5s ease;
 }
 
-.nav-arrow {
+.page.visible {
+  display: block;
+  opacity: 1;
+}
+
+.controls {
   position: absolute;
   top: 50%;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transform: translateY(-50%);
+  padding: 0 20px;
+  z-index: 10;
+  pointer-events: none; /* Pour éviter de bloquer les clics sur l'image */
+}
+
+.btn {
+  background: none;
+  border: none;
+  cursor: pointer;
   width: 60px;
   height: 60px;
-  transform: translateY(-50%);
-  cursor: pointer;
-  z-index: 9999;
-  pointer-events: auto;
+  pointer-events: all;
+  transition: transform 0.3s;
 }
 
-#prev {
-  left: 10px;
-}
-
-#next {
-  right: 10px;
-}
-
-.nav-arrow img {
+.btn img {
   width: 100%;
   height: auto;
   filter: drop-shadow(0 0 10px yellow);
-  transition: transform 0.3s ease;
 }
 
-.nav-arrow:hover img {
+.btn:hover {
   transform: scale(1.1);
 }
 
 @media (max-width: 768px) {
-  .nav-arrow {
+  .btn {
     width: 40px;
     height: 40px;
+  }
+
+  .btn img {
+    filter: drop-shadow(0 0 5px yellow);
   }
 }

@@ -1,7 +1,7 @@
 $(document).ready(function () {
   $('#flipbook').turn({
-    width: window.innerWidth,
-    height: window.innerHeight,
+    width: 800,
+    height: 600,
     autoCenter: true,
     elevation: 50,
     duration: 1000,
